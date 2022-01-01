@@ -37,6 +37,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $first_name;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $Last_name;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $birth_date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $alternance_job;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="user")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $group_name;
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -125,4 +163,90 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->Last_name;
+    }
+
+    public function setLastName(string $Last_name): self
+    {
+        $this->Last_name = $Last_name;
+
+        return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birth_date;
+    }
+
+    public function setBirthDate(\DateTimeInterface $birth_date): self
+    {
+        $this->birth_date = $birth_date;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAlternanceJob(): ?string
+    {
+        return $this->alternance_job;
+    }
+
+    public function setAlternanceJob(?string $alternance_job): self
+    {
+        $this->alternance_job = $alternance_job;
+
+        return $this;
+    }
+
+    public function getGroupName(): ?group
+    {
+        return $this->group_name;
+    }
+
+    public function setGroupName(group $group_name): self
+    {
+        $this->group_name = $group_name;
+
+        return $this;
+    }
+
+   
 }

@@ -10,6 +10,12 @@
             <div class="card-header text-center bg-white h5 font-italic mb-4"> Inscription</div>
             {{ form_start(registrationForm) }}
                 {{ form_row(registrationForm.email) }}
+                  {{ form_row(registrationForm.first_name) }}
+                  {{ form_row(registrationForm.Last_name) }}
+                  {{ form_row(registrationForm.birth_date) }}
+                  {{ form_row(registrationForm.address) }}
+                   {{ form_row(registrationForm.alternance_job) }}
+                    {{ form_row(registrationForm.city) }}
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Password'
                 }) }}

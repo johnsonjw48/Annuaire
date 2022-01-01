@@ -28,6 +28,11 @@ class Group
      */
     private $promo;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="group_name", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +58,23 @@ class Group
     public function setPromo(string $promo): self
     {
         $this->promo = $promo;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        // set the owning side of the relation if necessary
+        if ($user->getGroupName() !== $this) {
+            $user->setGroupName($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }
