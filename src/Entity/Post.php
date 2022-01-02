@@ -30,9 +30,14 @@ class Post
     private $created_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="post", cascade={"persist"})
      */
     private $photo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+     */
+    private $autheur;
 
     public function __construct()
     {
@@ -94,6 +99,18 @@ class Post
                 $photo->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAutheur(): ?User
+    {
+        return $this->autheur;
+    }
+
+    public function setAutheur(?User $autheur): self
+    {
+        $this->autheur = $autheur;
 
         return $this;
     }
