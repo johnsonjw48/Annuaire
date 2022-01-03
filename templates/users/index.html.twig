@@ -4,7 +4,60 @@
 
 {% block body %}
 
-   <div>toto</div>
+   <div class='row d-flex justify-content-around mt-4 gutters-sm'>
+   
+         <div class='card col-sm-3 col-md-3 col-xl-3 bg-light d-flex justify-content-center '>
+               <div class= 'h4 text-muted card font-italic mt-2 text-center '>Ton profil</div>
+
+               <div class='pl-1 pr-1 card mt-4 mb-4'>
+                        <i class="fas fa-user-circle fa-7x text-center text-muted mt-4 mb-4"></i>
+                        <p class='text-center h5'>James Johnson</p>
+                        <p class='text-center text-muted'>Alternant Full Stack Developer</p>
+                        <p class='d-flex justify-content-center'><button class= 'btn btn-outline-success'>Ajouter une photo de profil</button></p>
+               </div>
+
+               <div class='pl-1 pr-1 card  mb-4'>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Nom complet</span> <span class='text-muted'>James Johnson</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>10/05/1997</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>6 rue de Paris</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>Paris</span> </p>
+               </div>
+
+               
+         </div>
+
+         <div class= 'card col-sm-5 col-md-4 col-xl-4 bg-light  '>
+               <div class= 'h4 text-muted card font-italic mt-2 text-center'>Tes posts </div>
+                {% for post in posts %}
+
+                  <div class="row d-flex justify-content-center mt-5 d-flex mb-2">
+                        
+                              <div class="card col-sm-11 col-md-11 col-xl-11   ">
+                                    
+                                    <div class="p-3">
+                                          <div class="text-info h5 "> {{post.autheur.firstName}}</div>
+                                          <div class='d-flex justify-content-between'> <span class='text-danger'>{{post.autheur.groupName.name}}</span>  <span class='font-italic'>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</span>  </div> 
+                                          <p class= "mt-4 mb-4 text-justify">{{ post.content }} </p>
+                                         <div class='row'>
+                                                {% for image in post.photo %}
+                                                      <div class='mr-2'>
+                                                            <img src="{{ asset('/uploads/' ~ image.photoName) }}" alt="Image" class="img-thumbnail" width="150">
+                                                      </div>
+                                                {% endfor %}
+                                          </div>
+                                    </div>
+                              </div>
+                  </div>
+
+                {% endfor %}
+         </div>
+
+         <div class='card col-sm-4 col-md-4 col-xl-4 bg-light'>
+               <div class= 'h4 text-muted card font-italic mt-2 text-center'>Tes photos postées</div>
+         </div>
+   
+   </div>
+   
    
 
 {% endblock %}

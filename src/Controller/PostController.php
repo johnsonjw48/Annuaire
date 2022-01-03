@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Photo;
 use App\Entity\User;
+use DateTime;
 use App\Form\PostType;
+use App\Repository\PhotoRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,8 +36,10 @@ class PostController extends AbstractController
      */
     public function index(PostRepository $postRepository): Response
     {
+        $posts=$postRepository->findAll();
+        // dd($posts[0]->getPhoto());
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $posts,
         ]);
     }
 
@@ -46,8 +50,10 @@ class PostController extends AbstractController
     {
         
         $post = new Post();
+        $post->setCreatedAt(new DateTime('NOW'));
         $post->setAutheur($this->security->getUser());
-      
+        // dd($post);
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 

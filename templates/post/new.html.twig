@@ -3,9 +3,20 @@
 {% block title %}New Post{% endblock %}
 
 {% block body %}
-    <h1>Create new Post</h1>
 
-    {{ include('post/_form.html.twig') }}
+    <div class="card bg-light">
+            <h3 class='text-center mt-5 font-italic font-weight-bold text-success'>  Publier un post </h3>
+    </div>
+    
 
-    <a href="{{ path('post_index') }}">back to list</a>
+    <div>
+            {{ include('post/_form.html.twig') }}
+    </div>
+
+    
+    <div class='row d-flex justify-content-center mt-5'>
+            <a href="{{ path('post_index') }}"> <button class='btn btn-outline-danger'>Retour à l'acceuil</button> </a>
+    </div>
+
+    
 {% endblock %}

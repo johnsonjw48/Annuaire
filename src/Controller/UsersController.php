@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use App\Repository\PostRepository;
 
 class UsersController extends AbstractController
 {
@@ -23,9 +24,12 @@ class UsersController extends AbstractController
     /**
      * @Route("/users", name="users")
      */
-    public function index(): Response
+    public function index(PostRepository $postRepository): Response
     {
-        dd($this->security->getUser());
-        return $this->render('users/index.html.twig');
+        $user=$this->security->getUser();
+        // dd($user);
+        return $this->render('users/index.html.twig',  [
+            'posts' => $postRepository->findByExampleField($user),
+        ]);;
     }
 }
