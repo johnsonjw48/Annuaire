@@ -54,7 +54,20 @@
 
          <div class='card col-sm-4 col-md-4 col-xl-4 bg-light'>
                <div class= 'h4 text-muted card font-italic mt-2 text-center'>Tes photos postées</div>
+                {% for post in posts %}
+
+                        <div class='d-flex justify-content-around mt-3'>
+                              {% for image in post.photo %}
+                                    <div class='mr-2'>
+                                          <img src="{{ asset('/uploads/' ~ image.photoName) }}" alt="Image" class="img-thumbnail" width="150">
+                                    </div>
+                              {% endfor %}
+                        </div>
+                        
+                  {% endfor %}
          </div>
+
+        
    
    </div>
    

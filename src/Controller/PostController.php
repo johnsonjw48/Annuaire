@@ -37,9 +37,8 @@ class PostController extends AbstractController
     public function index(PostRepository $postRepository): Response
     {
         $posts=$postRepository->findAll();
-        // dd($posts[0]->getPhoto());
         return $this->render('post/index.html.twig', [
-            'posts' => $posts,
+            'posts' => array_reverse($posts),
         ]);
     }
 

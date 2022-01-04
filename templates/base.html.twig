@@ -8,13 +8,17 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            
         {% endblock %}
+
+
     </head>
     <body>
         <nav class="navbar sticky-top  navbar-expand-lg navbar-dark bg-dark ">
@@ -27,7 +31,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white " href="{{ path('post_new') }}">Publication</a>
+                        <a class="nav-link text-white " href="{{ path('post_new') }}">Groupes</a>
                     </li>
 
                      <li class="nav-item">
@@ -71,7 +75,9 @@
             </div>
         </nav>
 
+       
    
         {% block body %}{% endblock %}
+        
     </body>
 </html>
