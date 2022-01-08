@@ -1,32 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon profil{% endblock %}
+{% block title %}Profil utilisateur{% endblock %}
 
 {% block body %}
 
    <div class='row d-flex justify-content-around '>
    
          <div class='card col-sm-3 col-md-3 col-xl-3 bg-light d-flex justify-content-center sticky-top sticky-offset2 '>
-               
+               <div class= 'h4 text-muted card font-italic mt-2 text-center '>Profil de {{user.firstName}}</div>
 
                <div class='pl-1 pr-1 card mt-4 mb-4'>
                         <i class="fas fa-user-circle fa-7x text-center text-muted mt-4 mb-4"></i>
-                        <p class='text-center h5'>{{app.user.firstName}} {{app.user.lastName}}</p>
-                        <p class='text-center text-muted'>{{app.user.alternanceJob}} </p>
+                        <p class='text-center h5'>{{user.firstName}} {{user.lastName}}</p>
+                        <p class='text-center text-muted'>{{user.alternanceJob}}</p>
                         <p class='d-flex justify-content-center'><button class= 'btn btn-outline-success'>Ajouter une photo de profil</button></p>
                </div>
 
                <div class='pl-1 pr-1 card  mb-4'>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Nom complet</span> <span class='text-muted'>{{app.user.firstName}} {{app.user.lastName}}</span> </p>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>{{app.user.birthDate|date('d-m-Y')}}</span> </p>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>{{app.user.Address}}</span> </p>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>{{app.user.city}}</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Nom complet</span> <span class='text-muted'>{{user.firstName}} {{user.lastName}}</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>{{user.birthDate|date('d-m-Y')}}</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>{{user.Address}}</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>{{user.city}}</span> </p>
                </div>
 
                
          </div>
 
-         <div class= 'col-sm-5 col-md-4 col-xl-4   '>
+         <div class= 'col-sm-5 col-md-4 col-xl-4'>
                
                 {% for post in posts %}
 
@@ -53,7 +53,7 @@
          </div>
 
          <div class='card col-sm-4 col-md-4 col-xl-4 bg-light'>
-               <div class= 'h4 text-muted card font-italic mt-2 text-center'>Tes photos postées</div>
+               <div class= 'h4 text-muted card font-italic mt-2 text-center'>Photos</div>
                 {% for post in posts %}
 
                         <div class='d-flex justify-content-around mt-3'>
@@ -70,7 +70,5 @@
         
    
    </div>
-   
-   
 
 {% endblock %}

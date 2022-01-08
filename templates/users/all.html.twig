@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+
+
+
+{% for user in users %}
+
+
+<div class= 'row'>
+
+{% if loop.index % 2 != 0 and loop.index < users|length  %}
+    <div class="card w-25 ml-auto mr-auto mt-5">
+    <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
+        <p class="card-text text-danger font-italic">{{user.groupName.name}}</p>
+        <p class="card-text text-muted font-italic">{{user.alternanceJob}} </p>
+        <div class='d-flex justify-content-center'>
+            <a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-primary">Profil complet</a>
+        </div>
+        
+    </div>
+    </div>
+
+  
+        <div class="card w-25 ml-auto mr-auto mt-5">
+            <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{users[loop.index].firstName}} {{users[loop.index].lastName}}</h5>
+                <p class="card-text text-danger font-italic">{{users[loop.index].groupName.name}}</p>
+                <p class="card-text text-muted font-italic">{{users[loop.index].alternanceJob}} </p>
+                <div class='d-flex justify-content-center'>
+                    <a href="{{ path('user_show', {'id': users[loop.index].id}) }}" class="btn btn-primary">Profil complet </a>
+                </div>
+                
+            </div>
+        </div>
+{% endif %}
+
+{% if loop.index % 2 != 0 and loop.index == users|length %}
+         <div class="card w-25 ml-auto mr-auto mt-5">
+            <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{users[users|length - 1].firstName}} {{users[users|length - 1].lastName}}</h5>
+                <p class="card-text text-danger font-italic">{{users[users|length - 1].groupName.name}}</p>
+                <p class="card-text text-muted font-italic">{{users[users|length - 1].alternanceJob}} </p>
+                <div class='d-flex justify-content-center'>
+                    <a href="{{ path('user_show', {'id': users[users|length - 1].id}) }}" class="btn btn-primary">Profil complet</a>
+                </div>
+                
+            </div>
+        </div>
+{% endif %}
+
+</div>
+    
+
+
+
+
+
+{% endfor %}
+
+    
+{% endblock %}
