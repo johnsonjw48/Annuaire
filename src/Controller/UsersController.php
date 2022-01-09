@@ -69,7 +69,6 @@ class UsersController extends AbstractController
     {
         $user = $this->getUser();
         
-
         $form = $this->createForm(ProfileType::class, $user);
 
         $form->handleRequest($request);
@@ -78,7 +77,7 @@ class UsersController extends AbstractController
 
            
             $image= $form->get('avatar')->getData();
-            if ($image !== null) {
+            if ($image !== null && $user->getAvatar() === null) {
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
                 // On copie le fichier dans le dossier uploads
