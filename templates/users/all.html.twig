@@ -13,7 +13,12 @@
 
 {% if loop.index % 2 != 0 and loop.index < users|length  %}
     <div class="card w-25 ml-auto mr-auto mt-5">
-    <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+    {% if user.avatar is null %}
+        <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+    {% else %}
+        <img class="card-img-top" src="{{ asset('/uploads/' ~ user.avatar.avatarName) }}" alt="Card image cap">
+    {% endif %}
+    
     <div class="card-body">
         <h5 class="card-title">{{user.firstName}} {{user.lastName}}</h5>
         <p class="card-text text-danger font-italic">{{user.groupName.name}}</p>
@@ -27,7 +32,11 @@
 
   
         <div class="card w-25 ml-auto mr-auto mt-5">
-            <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            {% if users[loop.index].avatar is null %}
+                <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="{{ asset('/uploads/' ~ users[loop.index].avatar.avatarName) }}" alt="Card image cap">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{users[loop.index].firstName}} {{users[loop.index].lastName}}</h5>
                 <p class="card-text text-danger font-italic">{{users[loop.index].groupName.name}}</p>
@@ -42,7 +51,11 @@
 
 {% if loop.index % 2 != 0 and loop.index == users|length %}
          <div class="card w-25 ml-auto mr-auto mt-5">
-            <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            {% if users[users|length - 1].avatar is null %}
+                <img class="card-img-top" src="{{ asset('/uploads/userDefaut.png') }}" alt="Card image cap">
+            {% else %}
+                <img class="card-img-top" src="{{ asset('/uploads/' ~ users[users|length - 1].avatar.avatarName) }}" alt="Card image cap">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{users[users|length - 1].firstName}} {{users[users|length - 1].lastName}}</h5>
                 <p class="card-text text-danger font-italic">{{users[users|length - 1].groupName.name}}</p>

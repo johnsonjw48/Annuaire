@@ -26,7 +26,12 @@
                                 <div class="card col-sm-12 col-md-12 bg-light  ">
                                     
                                         <div class="p-3">
-                                            <div class="text-info h5 "> <i class="fas fa-user-circle fa-2x text-muted mr-2"></i> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>
+                                            {% if post.autheur.avatar is null %}
+                                                <div class="text-info h5 "> <img src="{{ asset('/uploads/userDefaut.png') }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>
+                                            {% else %}
+                                                <div class="text-info h5 "> <img src="{{ asset('/uploads/'~ post.autheur.avatar.avatarName) }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>
+                                            {% endif %}
+                                            
                                             <div class='d-flex justify-content-between'> <span class='text-danger'>{{post.autheur.groupName.name}}</span>  <span class='font-italic'>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</span>  </div> 
                                             <p class= "mt-4 mb-4 text-justify">{{ post.content }} </p>
                                             <div class='row'>

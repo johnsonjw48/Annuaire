@@ -10,10 +10,16 @@
                
 
                <div class='pl-1 pr-1 card mt-4 mb-4'>
-                        <i class="fas fa-user-circle fa-7x text-center text-muted mt-4 mb-4"></i>
+                       {% if app.user.avatar is null %}
+                             <i class="fas fa-user-circle fa-7x text-center text-muted mt-4 mb-4"></i>
+                       {% else %}
+                             <div class='d-flex justify-content-center mt-4 mb-3'><img src="{{ asset('/uploads/' ~ app.user.avatar.avatarName) }}" alt="Image" class='rounded-circle' width="200"> </div> 
+                       {% endif %}
+                       
+                        
                         <p class='text-center h5'>{{app.user.firstName}} {{app.user.lastName}}</p>
                         <p class='text-center text-muted'>{{app.user.alternanceJob}} </p>
-                        <p class='d-flex justify-content-center'><button class= 'btn btn-outline-success'>Ajouter une photo de profil</button></p>
+                        
                </div>
 
                <div class='pl-1 pr-1 card  mb-4'>
@@ -21,9 +27,10 @@
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>{{app.user.birthDate|date('d-m-Y')}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>{{app.user.Address}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>{{app.user.city}}</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Groupe</span> <span class='text-muted'>M1TL - 2021/2022</span> </p>
                </div>
 
-               
+               <p class='d-flex justify-content-center'><a class= 'btn btn-outline-success btn-block mt-1' href="{{ path('profil_modifier') }}" >Modifier le profil</a></p>
          </div>
 
          <div class= 'col-sm-5 col-md-4 col-xl-4   '>
@@ -35,7 +42,11 @@
                               <div class="card col-sm-11 col-md-11 col-xl-11   ">
                                     
                                     <div class="p-3">
-                                          <div class="text-info h5 "> {{post.autheur.firstName}} {{post.autheur.lastName}}</div>
+                                          {% if post.autheur.avatar is null %}
+                                                <div class="text-info h5 "> <img src="{{ asset('/uploads/userDefaut.png') }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>
+                                          {% else %}
+                                                <div class="text-info h5 "> <img src="{{ asset('/uploads/'~ post.autheur.avatar.avatarName) }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>
+                                          {% endif %}
                                           <div class='d-flex justify-content-between'> <span class='text-danger'>{{post.autheur.groupName.name}}</span>  <span class='font-italic'>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</span>  </div> 
                                           <p class= "mt-4 mb-4 text-justify">{{ post.content }} </p>
                                          <div class='row'>

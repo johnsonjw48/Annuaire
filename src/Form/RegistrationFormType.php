@@ -22,7 +22,12 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('first_name')
             ->add('Last_name')
-            ->add('birth_date', DateTimeType::class)
+            ->add('birth_date', DateTimeType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy',
+                "data" => new \DateTime(),
+                'html5'=>false
+            ])
             ->add('address')
             ->add('alternance_job')
             ->add('city')
