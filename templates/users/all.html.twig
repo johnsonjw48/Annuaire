@@ -5,6 +5,16 @@
 {% block body %}
 
 
+<div class= 'container row mt-5'>
+    <div class= 'col-xl-3 offset-xl-6 '>
+        {{ form_start(form) }}
+               {{form_widget(form.qFirstName)}}
+               {{form_widget(form.qGroup)}} 
+               <div class='d-flex justify-content-center mt-2'> <button type="submit" class="btn btn-primary ">Filtrer</button> </div>
+        {{ form_end(form) }}
+    </div>
+        
+</div>
 
 {% for user in users %}
 

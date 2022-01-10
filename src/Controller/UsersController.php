@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\Avatar;
 use App\Entity\User;
 use App\Form\ProfileType;
+use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,11 +44,23 @@ class UsersController extends AbstractController
     /**
      * @Route("/users/all", name="users_all")
      */
-    public function all(UserRepository $userRepository): Response
+    public function all(UserRepository $userRepository, Request $request): Response
     {
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+
+        $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     dd($userRepository->getSearchQuery($data));
+
+        // }
+       
+        // $users= $userRepository->getSearchQuery($data);
 
         return $this->render('users/all.html.twig', [
-            'users'=> $userRepository->findAll()
+            'users'=> $userRepository->getSearchQuery($data),
+            'form'=>$form->createView()
         ]);
     }
 
@@ -112,18 +126,18 @@ class UsersController extends AbstractController
         
         $data = json_decode($request->getContent(), true);
 
-        // On vérifie si le token est valide
+     
         if($this->isCsrfTokenValid('delete'.$avatar->getId(), $data['_token'])){
-            // On récupère le nom de l'image
+           
             $nom = $avatar->getAvatarName();
-            // On supprime le fichier
+          
             unlink($this->getParameter('images_directory').'/'.$nom);
 
-            // On supprime l'entrée de la base
+            
             $entityManager->remove($avatar);
             $entityManager->flush();
 
-            // On répond en json
+           
             return new JsonResponse(['success' => 1]);
         }else{
             return new JsonResponse(['error' => 'Token Invalide'], 400);
