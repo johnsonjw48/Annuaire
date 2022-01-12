@@ -6,21 +6,39 @@
 
     <div class="container row   mt-5">
         
-        <div class="d-block p-5 offset-md-6 col-sm-6 col-md-4 bg-light card">
+        <div class="d-block p-5 offset-md-5 col-sm-6 col-md-4 col-xl-6 bg-light card">
             <div class="card-header text-center bg-white h5 font-italic mb-4"> Inscription</div>
             {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.email) }}
+                <div class= 'd-flex justify-content-between'>
+                     {{ form_row(registrationForm.email) }}
                   {{ form_row(registrationForm.first_name) }}
+                </div>
+
+                <div class='d-flex justify-content-between'>
                   {{ form_row(registrationForm.Last_name) }}
-                  {{ form_row(registrationForm.birth_date) }}
+                  {{ form_row(registrationForm.birth_date) }}    
+                </div>
+
+                <div class='d-flex justify-content-between'>
                   {{ form_row(registrationForm.address) }}
                   {{ form_row(registrationForm.groupName) }}
-                   {{ form_row(registrationForm.alternance_job) }}
-                    {{ form_row(registrationForm.city) }}
-                {{ form_row(registrationForm.plainPassword, {
+                </div>
+
+                <div class='d-flex justify-content-between'>
+                     {{ form_row(registrationForm.alternance_job) }}
+                    {{ form_row(registrationForm.city) }}              
+                </div>
+                
+                <div class='d-flex justify-content-between'>
+                     {{ form_row(registrationForm.plainPassword, {
                     label: 'Password'
                 }) }}
-                {{ form_row(registrationForm.agreeTerms) }}
+                </div>
+
+               <div class='d-flex justify-content-center'>
+                     {{ form_row(registrationForm.agreeTerms) }}
+               </div>
+               
 
                 <button type="submit" class="btn btn-lg btn-block btn-warning">S'inscrire</button>
             {{ form_end(registrationForm) }}

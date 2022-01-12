@@ -41,7 +41,7 @@ class UsersController extends AbstractController
         $post = new Post();
         $post->setCreatedAt(new DateTime('NOW'));
         $post->setAutheur($this->security->getUser());
-        // dd($post);
+       
 
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
@@ -51,13 +51,13 @@ class UsersController extends AbstractController
             foreach ($images as $image) {
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
-                // On copie le fichier dans le dossier uploads
+                
                 $image->move(
                     $this->getParameter('images_directory'),
                     $fichier
                 );
 
-                // On stocke l'image dans la base de données (son nom)
+               
                 $img = new Photo();
                 $img->setPhotoName($fichier);
                 $post->addPhoto($img);
@@ -87,13 +87,6 @@ class UsersController extends AbstractController
 
         $form->handleRequest($request);
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     dd($userRepository->getSearchQuery($data));
-
-        // }
-       
-        // $users= $userRepository->getSearchQuery($data);
-
         return $this->render('users/all.html.twig', [
             'users'=> $userRepository->getSearchQuery($data),
             'form'=>$form->createView()
@@ -101,13 +94,43 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="user_show", methods={"GET"})
+     * @Route("/users/{id}", name="user_show", methods={"GET", "POST"})
      */
-    public function show(User $user, PostRepository $postRepository): Response
+    public function show(EntityManagerInterface $entityManager, User $user, PostRepository $postRepository, Request $request ): Response
     {
+        $post = new Post();
+        $post->setCreatedAt(new DateTime('NOW'));
+        $post->setAutheur($this->security->getUser());
         
+
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $images= $form->get('photos')->getData();
+            foreach ($images as $image) {
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                
+                $img = new Photo();
+                $img->setPhotoName($fichier);
+                $post->addPhoto($img);
+            }
+
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('user_show', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
+        }     
         return $this->render('users/show.html.twig', [
             'user' => $user,
+            'form' => $form->createView(),
             'posts' => $postRepository->findByExampleField($user)
         ]);
     }
@@ -166,7 +189,7 @@ class UsersController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            // $this->addFlash('message', 'Profil mis à jour');
+          
             return $this->redirectToRoute('users');
         }
 
