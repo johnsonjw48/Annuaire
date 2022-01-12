@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
         // dd($group[0]);
 
         $user = new User();
-        $user->setGroupName($group[0]);
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 

@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Group;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -18,6 +21,7 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
         $builder
             ->add('email')
             ->add('first_name')
@@ -29,6 +33,12 @@ class RegistrationFormType extends AbstractType
                 'html5'=>false
             ])
             ->add('address')
+            ->add('groupName', EntityType::class, [
+                'class' => Group::class,
+                'choice_label' => function ($group) {
+                    return $group->getName();
+                }
+            ])
             ->add('alternance_job')
             ->add('city')
             ->add('agreeTerms', CheckboxType::class, [

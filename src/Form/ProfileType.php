@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Group;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -24,6 +26,12 @@ class ProfileType extends AbstractType
             ])
             ->add('address')
             ->add('city')
+            ->add('groupName', EntityType::class, [
+                'class' => Group::class,
+                'choice_label' => function ($group) {
+                    return $group->getName();
+                }
+            ])
             ->add('alternance_job')
             ->add('avatar', FileType::class, [
                 'label' =>'Photo de profil',

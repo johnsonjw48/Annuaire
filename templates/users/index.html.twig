@@ -27,13 +27,19 @@
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>{{app.user.birthDate|date('d-m-Y')}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>{{app.user.Address}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>{{app.user.city}}</span> </p>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Groupe</span> <span class='text-muted'>M1TL - 2021/2022</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Groupe</span> <span class='text-muted'> {{app.user.groupName.name}} </span> </p>
                </div>
 
                <p class='d-flex justify-content-center'><a class= 'btn btn-outline-success btn-block mt-1' href="{{ path('profil_modifier') }}" >Modifier le profil</a></p>
          </div>
 
          <div class= 'col-sm-5 col-md-4 col-xl-4   '>
+         
+                <div class= 'row mt-4 d-flex mb-2 d-flex justify-content-center'>
+                     <div class='card col-sm-11 col-md-11 col-xl-11'>
+                              {{ include('post/_form.html.twig') }}
+                     </div>
+                </div>
                
                 {% for post in posts %}
 

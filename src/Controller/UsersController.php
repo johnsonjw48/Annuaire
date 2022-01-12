@@ -34,14 +34,44 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/users", name="users")
+     * @Route("/users", name="users", methods={"GET", "POST"})
      */
     public function index(EntityManagerInterface $entityManager,PostRepository $postRepository, Request $request): Response
     {
+        $post = new Post();
+        $post->setCreatedAt(new DateTime('NOW'));
+        $post->setAutheur($this->security->getUser());
+        // dd($post);
 
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $images= $form->get('photos')->getData();
+            foreach ($images as $image) {
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image dans la base de données (son nom)
+                $img = new Photo();
+                $img->setPhotoName($fichier);
+                $post->addPhoto($img);
+            }
+
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('users', [], Response::HTTP_SEE_OTHER);
+        }
         $user=$this->security->getUser();
         // dd($user);
         return $this->render('users/index.html.twig',  [
+            'form' => $form->createView(),
             'posts' => $postRepository->findByExampleField($user),
             
         ]);

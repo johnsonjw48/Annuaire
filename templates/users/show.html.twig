@@ -28,7 +28,7 @@
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Date de naissance</span> <span class='text-muted'>{{user.birthDate|date('d-m-Y')}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Adresse</span> <span class='text-muted'>{{user.Address}}</span> </p>
                         <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Ville</span> <span class='text-muted'>{{user.city}}</span> </p>
-                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Groupe</span> <span class='text-muted'>M1TL - 2021/2022</span> </p>
+                        <p class='mt-4 d-flex justify-content-around'> <span class='font-weight-bold'>Groupe</span> <span class='text-muted'> {{user.groupName.name}} </span> </p>
                </div>
 
                {% if user.id == app.user.id %}

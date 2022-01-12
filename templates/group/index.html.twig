@@ -5,16 +5,20 @@
 {% block body %}
 
 
-<div class="card text-center w-50 mt-5 ml-auto mr-auto">
-  <div class="card-header text-danger h5 font-weight-bold ">
-    Groupe M1TL
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Titre de la formation</h5>
-    <p class="card-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta iure cupiditate assumenda blanditiis fugit minus autem nobis modi unde a reiciendis asperiores cumque repudiandae fuga accusamus dignissimos, fugiat odio! Dolor.</p>
-   
-  </div>
-</div>
+{% for group in groups %}
+  <div class="card text-center w-50 mt-5 ml-auto mr-auto">
+        <div class="card-header text-danger h5 font-weight-bold ">
+          {{group.name}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title font-italic text-primary">Promotion : {{group.promo}} </h5>
+          <p class="card-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta iure cupiditate assumenda blanditiis fugit minus autem nobis modi unde a reiciendis asperiores cumque repudiandae fuga accusamus dignissimos, fugiat odio! Dolor.</p>
+          <p> <button class='btn btn-outline-success mt-4 '>Etudiants</button> </p>
+        </div>
+  </div> 
+{% endfor %}
+
+    
         
 
 
