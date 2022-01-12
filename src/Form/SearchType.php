@@ -26,7 +26,7 @@ class SearchType extends AbstractType
                 'required'=>false,
                 'label'=> false,
                 'attr'=>[
-                    'placeholder'=>'Search by group',
+                    'placeholder'=>'Search by group: ex M1TL',
                 ]
             ])
         ;

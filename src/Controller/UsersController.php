@@ -5,6 +5,10 @@ namespace App\Controller;
 use App\Data\SearchData;
 use App\Entity\Avatar;
 use App\Entity\User;
+use App\Entity\Post;
+use DateTime;
+use App\Form\PostType;
+use App\Entity\Photo;
 use App\Form\ProfileType;
 use App\Form\SearchType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,13 +36,15 @@ class UsersController extends AbstractController
     /**
      * @Route("/users", name="users")
      */
-    public function index(PostRepository $postRepository): Response
+    public function index(EntityManagerInterface $entityManager,PostRepository $postRepository, Request $request): Response
     {
+
         $user=$this->security->getUser();
         // dd($user);
         return $this->render('users/index.html.twig',  [
             'posts' => $postRepository->findByExampleField($user),
-        ]);;
+            
+        ]);
     }
 
     /**
@@ -92,6 +98,26 @@ class UsersController extends AbstractController
            
             $image= $form->get('avatar')->getData();
             if ($image !== null && $user->getAvatar() === null) {
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+
+                // On copie le fichier dans le dossier uploads
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+
+                // On stocke l'image dans la base de données (son nom)
+                $img = new Avatar();
+                $img->setAvatarName($fichier);
+                $user->setAvatar($img);
+
+            }elseif($user->getAvatar()!== null) {
+                unlink($this->getParameter('images_directory').'/'.$user->getAvatar()->getAvatarName());
+
+            
+                $entityManager->remove($user->getAvatar());
+                $entityManager->flush();
+
                 $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
                 // On copie le fichier dans le dossier uploads
