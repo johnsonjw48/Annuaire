@@ -76,20 +76,5 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ->getQuery()
         ->getResult()
     ;
-    //    $query= $this->createQueryBuilder('r');
-
-    //    if (!empty($search->qName)) {
-    //       $query= $query
-    //       ->andWhere('r.firstName LIKE :qFirstName')
-    //       ->setParameter('qFirstName', "%{$search->qFirstName}%");
-    //    }
-
-    //    if (!empty($search->qCity)) {
-    //     $query= $query
-    //     ->andWhere('r.group LIKE :qGroup')
-    //     ->setParameter('qGroup', "%{$search->qGroup}%");
-    //    }
-
-    //    return $query->getQuery()->getResult();
     }
 }
