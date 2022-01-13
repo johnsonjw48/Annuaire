@@ -2,7 +2,34 @@
 
     {{ form_start(form) }}
     {{ form_widget(form) }}
-        <button class="btn btn-success">{{ button_label|default('Poster') }}</button>
+
+        {% if  app.request.attributes.get('_route') == 'post_edit' %}
+                {% for image in post.photo %}
+                    <div class= 'd-flex justify-content-between mb-2 mt-5'>
+                        {% if loop.index % 2 != 0 and loop.index < post.photo|length %}
+                          <span>  <img src="{{ asset('/uploads/' ~ image.photoName) }}" alt="Image" class='rounded float-start' width="200"> <a href="{{ path('post_delete_photo', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}"> <i class=" ml-3 fa fa-trash"></i> </a>  </span> 
+                           <span> <img src="{{ asset('/uploads/' ~ post.photo[loop.index].photoName) }}" alt="Image" class='rounded float-end' width="200"> <a href="{{ path('post_delete_photo', {id: post.photo[loop.index].id}) }}" data-delete data-token="{{ csrf_token('delete' ~ post.photo[loop.index].id) }}"> <i class=" ml-3 fa fa-trash"></i>  </a>  </span> 
+                        {% endif %}
+                    </div>
+                        {% if loop.index % 2 != 0 and loop.index == post.photo|length %}
+                           <div class= 'd-flex justify-content-center'>
+                                <img src="{{ asset('/uploads/' ~ post.photo[post.photo|length - 1].photoName) }}" alt="Image" class='rounded mx-auto d-block' width="200">
+                                <a href="{{ path('post_delete_photo', {id: post.photo[post.photo|length - 1].id}) }}" data-delete data-token="{{ csrf_token('delete' ~ post.photo[post.photo|length - 1].id) }}"> <i class="fa fa-trash"></i> </a> 
+                           </div> 
+                        {% endif %}
+                
+                {% endfor %}
+                <div class='d-flex justify-content-center'>
+                    <button class="btn btn-success mt-3 ">{{ button_label|default('Modifier') }}</button>
+                </div>
+        {% else %}
+                <div class='d-flex justify-content-center'>
+                    <button class="btn btn-success  ">{{ button_label|default('Poster') }}</button>
+                </div>
+        {% endif %}
+
+
+
     {{ form_end(form) }}
 
 </div>

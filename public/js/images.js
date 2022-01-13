@@ -10,7 +10,7 @@ window.onload = () => {
             e.preventDefault()
 
   
-            if(confirm("Voulez-vous supprimer cette image ?")){
+            if(confirm("Voulez-vous vraiment effectuer cette supression ?")){
                
                 fetch(this.getAttribute("href"), {
                     method: "DELETE",

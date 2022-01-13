@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier votre post{% endblock %}
+
+{% block body %}
+
+        <div class='row d-flex justify-content-center'>
+
+            <div class='row col-sm-6 col-md-4 col-xl-5 card mt-5 '>
+
+                    <div>
+                            {{ include('post/_form.html.twig') }}
+                    </div>
+
+            </div>  
+         </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+{% endblock %}

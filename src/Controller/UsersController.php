@@ -87,6 +87,12 @@ class UsersController extends AbstractController
 
         $form->handleRequest($request);
 
+
+        if($form->get('clear')->isClicked()) {
+            return $this->redirectToRoute('users_all');
+        }
+    
+
         return $this->render('users/all.html.twig', [
             'users'=> $userRepository->getSearchQuery($data),
             'form'=>$form->createView()

@@ -50,9 +50,9 @@
                                              
                                     <div class="p-3">
                                           {% if post.autheur.avatar is null %}
-                                                  <div class="text-info h5 d-flex justify-content-between"> <div> <img src="{{ asset('/uploads/userDefaut.png') }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span></div> <div> <i class="fa fa-edit"></i>  <i class="fa fa-trash"></i>   </div> </div>
+                                                  <div class="text-info h5 d-flex justify-content-between"> <div> <img src="{{ asset('/uploads/userDefaut.png') }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span></div> <div> <a href="{{ path('post_edit', {'id': post.id}) }}"> <i class="fa fa-edit"></i> </a>  <i class="fa fa-trash"></i>   </div> </div>
                                           {% else %}
-                                                <div class="text-info h5 d-flex justify-content-between"> <div> <img src="{{ asset('/uploads/'~ post.autheur.avatar.avatarName) }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>  <div> <i class="fa fa-edit"></i> <i class="fa fa-trash"></i>  </div>   </div>
+                                                <div class="text-info h5 d-flex justify-content-between"> <div> <img src="{{ asset('/uploads/'~ post.autheur.avatar.avatarName) }}" alt="Image" class='rounded-circle mr-3' width="50"> <span> {{post.autheur.firstName}} {{post.autheur.lastName}}</span> </div>  <div> <a href="{{ path('post_edit', {'id': post.id}) }}"> <i class="fa fa-edit"></i> </a> <i class="fa fa-trash"></i>  </div>   </div>
                                           {% endif %}
                                           <div class='d-flex justify-content-between'> <span class='text-danger'>{{post.autheur.groupName.name}}</span>  <span class='font-italic'>{{ post.createdAt|ago(locale='fr') }}</span>  </div> 
                                           <p class= "mt-4 mb-4 text-justify">{{ post.content }} </p>

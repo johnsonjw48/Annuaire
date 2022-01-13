@@ -39,42 +39,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+   
 
     public function getSearchQuery(SearchData $search)
     {
-        return $this->createQueryBuilder('r')
-        ->andWhere('r.first_name LIKE :qFirstName')
-        ->setParameter('qFirstName', "%{$search->qFirstName}%")
-        ->getQuery()
-        ->getResult()
-    ;
+        $query = $this->createQueryBuilder('r');
+
+        if ($search->qGroup) {
+            $query=$query
+            ->select('r')
+            ->innerJoin('r.group_name', 'g')
+            ->where('g.name LIKE :qGroup')
+            ->setParameter('qGroup', "%{$search->qGroup}%");
+        }
+
+        if ($search->qFirstName) {
+            $query=$query
+            ->andWhere('r.first_name LIKE :qFirstName')
+            ->setParameter('qFirstName', "%{$search->qFirstName}%");
+        }
+    
+        return $query->getQuery()->getResult();
     }
 }
