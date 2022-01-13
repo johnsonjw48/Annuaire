@@ -17,12 +17,14 @@ Pour créer la base de donnée :
 php bin/console doctrine:database:create
 ```
 
+```
 php bin/console doctrine:schema:update
 ```
 
 Avant de lancer le projet, insérer manuellement au moins une entrée dans la table groupe:
 
 Ex :
+
 ```
  INSERT INTO `group` (`id`, `name`, `promo`) VALUES (NULL, 'M1TL', '2020-2021')
 ```
