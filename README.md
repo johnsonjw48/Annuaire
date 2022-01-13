@@ -21,7 +21,7 @@ php bin/console doctrine:database:create
 php bin/console doctrine:schema:update
 ```
 
-Avant de lancer le projet, insérer manuellement au moins une entrée dans la table groupe:
+Avant de lancer le projet, insérer manuellement au moins une entrée dans la table groupe en SQL:
 
 Ex :
 
