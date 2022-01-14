@@ -1,5 +1,4 @@
-# LiveQuestion-Symfony4 
-
+# Annuaire
 L’objectif de ce projet est de créer un annuaire permettant aux étudiants de partager des posts et des photos les uns avec les autres, et de pouvoir accéder aux infos de profil de chacun des étudiants.
 
 ### Installation : 
